@@ -3,11 +3,13 @@ from pydantic import BaseModel
 import os
 import base64
 from google.cloud import vision
+import uuid  # For generating unique IDs (though we'll use a counter)
 
 # Google Vision API setup
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = './credential/vital-code-441506-t5-1bc3561300e6.json'
 client = vision.ImageAnnotatorClient()
-
+# In-memory ID counter, initialized to 0
+current_id = 0
 app = FastAPI()
 
 # Pydantic model to receive image data as base64 in JSON
@@ -40,12 +42,37 @@ def image_to_text(base64_image: str) -> str:
     detected_text = detected_text.replace("\n", " ")
     return detected_text
 
+
+# Function to append detected text to a text file with one line space between entries
+def append_text_to_file(detected_text: str) -> str:
+    global current_id  # Access the global counter
+
+    # Generate the filename (you could also use the current ID here if needed)
+    filename = "detected_texts.txt"
+    file_path = os.path.join("output_files", filename)
+
+    # Ensure the output directory exists
+    os.makedirs("output_files", exist_ok=True)
+
+    # Append the detected text with a line space
+    with open(file_path, "a") as file:
+        # If the file is not empty, append a new line first
+        if os.path.getsize(file_path) > 0:
+            file.write("\n")  # Line break before the new entry
+        file.write(f"Detected Text: {detected_text}\n")
+
+    print(f"Detected text appended to {file_path}")
+
+    return file_path
+
 # FastAPI route to handle image OCR request
 @app.post("/extract-text-from-base64-image/")
 async def extract_text_from_base64_image(image: ImageData):
     try:
         print("Received request with base64 image data.")
         detected_text = image_to_text(image.base64_image)
+        # Step 2: Save detected text to a file with auto-incremented ID
+        file_path = append_text_to_file(detected_text)
         return {"detected_text": detected_text}
     except HTTPException as e:
         print("HTTP Exception:", e.detail)
