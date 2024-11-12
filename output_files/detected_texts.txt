@@ -1,4 +1,1 @@
-Detected Text: B30046 3024 SNI
-Detected Text: B30046 3024 SNI
-
-Detected Text: B30046 3024 SNI
+ID: 2, DateTime: 2024-11-12 18:42:25, Detected Text: B30046 3024 SNI

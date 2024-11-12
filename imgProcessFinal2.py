@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import os
 import base64
 from google.cloud import vision
+from datetime import datetime
 import uuid  # For generating unique IDs (though we'll use a counter)
 
 # Google Vision API setup
@@ -43,9 +44,12 @@ def image_to_text(base64_image: str) -> str:
     return detected_text
 
 
-# Function to append detected text to a text file with one line space between entries
+# Function to append detected text to a text file with ID and DateTime
 def append_text_to_file(detected_text: str) -> str:
     global current_id  # Access the global counter
+
+    # Get the current date and time
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Generate the filename (you could also use the current ID here if needed)
     filename = "detected_texts.txt"
@@ -54,14 +58,17 @@ def append_text_to_file(detected_text: str) -> str:
     # Ensure the output directory exists
     os.makedirs("output_files", exist_ok=True)
 
-    # Append the detected text with a line space
+    # Append the detected text with ID and DateTime
     with open(file_path, "a") as file:
         # If the file is not empty, append a new line first
         if os.path.getsize(file_path) > 0:
             file.write("\n")  # Line break before the new entry
-        file.write(f"Detected Text: {detected_text}\n")
+        file.write(f"ID: {current_id}, DateTime: {current_time}, Detected Text: {detected_text}\n")
 
     print(f"Detected text appended to {file_path}")
+
+    # Increment the ID for the next request
+    current_id += 1
 
     return file_path
 
