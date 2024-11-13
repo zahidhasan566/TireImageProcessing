@@ -1,1 +1,27 @@
 ID: 2, DateTime: 2024-11-12 18:42:25, Detected Text: B30046 3024 SNI
+
+ID: 0, DateTime: 2024-11-13 05:02:47, Detected Text: 
+
+ID: 1, DateTime: 2024-11-13 05:03:46, Detected Text: 
+
+ID: 2, DateTime: 2024-11-13 05:03:54, Detected Text: 
+
+ID: 3, DateTime: 2024-11-13 05:09:19, Detected Text: 
+
+ID: 4, DateTime: 2024-11-13 05:10:45, Detected Text: B30046 3024 SNI
+
+ID: 5, DateTime: 2024-11-13 05:11:59, Detected Text: B30046 3024 SNI
+
+ID: 6, DateTime: 2024-11-13 05:15:38, Detected Text: B30046 3024 SNI
+
+ID: 7, DateTime: 2024-11-13 05:15:55, Detected Text: B30046 3024 SNI
+
+ID: 8, DateTime: 2024-11-13 05:16:53, Detected Text: B30046 3024 SNI
+
+ID: 9, DateTime: 2024-11-13 05:19:39, Detected Text: B30046 3024 SNI
+
+ID: 10, DateTime: 2024-11-13 05:19:47, Detected Text: B30046 3024 SNI
+
+ID: 11, DateTime: 2024-11-13 05:20:00, Detected Text: B30046 3024 SNI
+
+ID: 12, DateTime: 2024-11-13 05:20:50, Detected Text: B30046 3024 SNI

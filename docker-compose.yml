@@ -1,0 +1,24 @@
+services:
+  tire_image_processing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "tire_image_processing"
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    command: "uvicorn imgProcessFinal2:app --host 0.0.0.0 --port 4000 --reload"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 512M
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3030/admin/"]
+    #   interval: 150s
+    #   timeout: 15s
+    #   retries: 5
+    # restart: always
+    # stdin_open: true
+    # tty: true

@@ -1,0 +1,15 @@
+Description=Tire Image Processing Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/aci-mis-ai/TireImageProcessing
+ExecStart=/usr/local/bin/docker-compose -f /home/aci-mis-ai/TireImageProcessing/docker-compose.yml up --build --remove-orphans
+ExecStop=/usr/local/bin/docker-compose -f /home/aci-mis-ai/TireImageProcessing/docker-compose.yml down -v
+Restart=always
+RestartSec=60
+RuntimeMaxSec=infinity
+PIDFile=/tmp/name_script.pid
+
+[Install]
+WantedBy=multi-user.target
